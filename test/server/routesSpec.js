@@ -1,5 +1,12 @@
 
 var app = require('../../server/server');
+var dbUtils = require('../testDB');
+var clearDB = function(){
+  dbUtils.dropTables();
+  dbUtils.runSchema();
+
+}
+clearDB();
 
 app.listen(3113);
 
@@ -115,6 +122,7 @@ describe("User tests", function (){
 });
 
 describe("User authentication tests", function(){
+  
   before(function(done){
     agent.post("/api/users/signin")
       .send({username: 'BigPete',
